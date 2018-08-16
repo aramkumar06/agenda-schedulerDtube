@@ -1,0 +1,119 @@
+<button matTooltip="Save settings" class="floatingSave" color="primary" mat-fab (click)="save()">
+  <mat-icon class="mat-24">save</mat-icon>
+</button>
+
+<div fxLayout="row"
+      fxLayoutGap="10px"
+      fxLayout.xs="column">
+
+  <div fxFlex>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Edit this post for an upcoming share</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+        <mat-accordion class="example-headers-align">
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Basic Info</mat-panel-title>
+              <mat-panel-description>Title, description and tags <mat-icon>account_circle</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="flex_container">
+              <mat-form-field>
+                <input matInput placeholder="Title" [(ngModel)]="video.title">
+              </mat-form-field>
+
+              <mat-form-field class="example-chip-list">
+                <mat-chip-list #tagList>
+                  <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                            [removable]="removable" (removed)="remove(tag)">
+                    {{tag}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="New tags..."
+                         [matChipInputFor]="tagList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-hint align="start"><strong>Entering comma, space or pressing ENTER, inserts new tag.Backspace for removing.</strong></mat-hint>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput #message maxlength="256" placeholder="Description" [(ngModel)]="video.shareInfo.description">
+                <mat-hint align="start"><strong>Keep it simple</strong> </mat-hint>
+                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <mat-action-row>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>SOON</mat-panel-title>
+              <mat-panel-description>Add multiple quality videos. SOON<mat-icon>map</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="flex_container">
+
+            </div>
+
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Schedule sharing</mat-panel-title>
+              <mat-panel-description>Select time and date of sharing for this post<mat-icon>date_range</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="flex_container">
+              <owl-date-time-inline [(ngModel)]="video.scheduled"></owl-date-time-inline>
+            </div>
+
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>Steemit Post Edit</mat-panel-title>
+              <mat-panel-description>Enter body for the steemit post.<mat-icon>date_range</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="flex_container">
+              <mat-form-field>
+                <input matInput placeholder="Enter body ..." [(ngModel)]="video.shareInfo.body">
+                <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
+                <mat-hint align="end">You can enter HTML code here</mat-hint>
+              </mat-form-field>
+              <button mat-raised-button (click)="previewBody()">Preview</button>
+            </div>
+
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()">End</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</div>

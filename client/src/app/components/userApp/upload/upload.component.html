@@ -1,0 +1,59 @@
+<div fxLayout="column"
+     fxLayoutGap="10px">
+
+  <div fxFlex>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Upload videos</mat-card-title>
+        <mat-card-subtitle>Please select and be patient on the uploading phase</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <input #files type="file" [hidden]="true" [accept]="formats" (change)="handleFileInput(files.files)" multiple>
+        <button mat-raised-button #upload (click)="files.click()">Upload file</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex *ngIf="videosUploading.length > 0">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Uploading videos</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <h3 mat-subheader>Videos</h3>
+          <mat-list-item *ngFor="let data of videosUploading">
+            <mat-icon mat-list-icon>movie</mat-icon>
+            <h4 mat-line>{{data?.video.title}}</h4>
+            <p mat-line>{{data?.video?.data?.file?.size | fileSize}}</p>
+            <p mat-line>
+              <mat-progress-bar mode="determinate" [value]="data.progress"></mat-progress-bar>
+            </p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex *ngIf="ipfsUploading.length > 0">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>IPFS Uploading</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <h3 mat-subheader>Videos</h3>
+          <mat-list-item *ngFor="let data of ipfsUploading">
+            <mat-icon mat-list-icon>movie</mat-icon>
+            <h4 mat-line>{{data?.video.title}}</h4>
+            <p mat-line>{{data?.video?.data?.file?.size | fileSize}}</p>
+            <p mat-line>
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</div>

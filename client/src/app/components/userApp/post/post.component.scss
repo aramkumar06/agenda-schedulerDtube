@@ -1,0 +1,14 @@
+.floatingSave {
+  margin:0;
+  position:fixed;
+  bottom: 5em;
+  right: 2em;
+  z-index: 10000;
+}
+
+.flex_container {
+  display: flex;
+  flex-direction: column;
+  mat-form-field { width: 100%; }
+}
+
