@@ -16,7 +16,7 @@
     "build:client": "cd client && ng build --prod --aot",
     "build:server": "cd server && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-prebuild": "npm install -g @angular/cli@latest && npm run app-install",
+    "heroku-prebuild": "npm install -g @angular/cli@6.0.8 && npm run app-install",
     "heroku-postbuild": "npm run build && set NODE_ENV=production"
   },
   "keywords": [],
