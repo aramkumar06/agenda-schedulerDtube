@@ -38,6 +38,6 @@
     "socket.io-client": "^2.1.1",
     "steem": "^0.7.1",
     "ts-node": "^7.0.0",
-    "typescript": "^2.9.2",
+    "typescript": "^2.9.2"
   }
 }
